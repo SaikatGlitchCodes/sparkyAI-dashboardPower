@@ -23,17 +23,17 @@ const FarmSelector: React.FC<FarmSelectorProps> = ({
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2 text-white hover:bg-zinc-700 transition-colors"
+        className="flex items-center gap-2 px-3 py-2 text-sm text-white transition-colors border rounded-lg sm:gap-3 sm:px-4 bg-zinc-800 border-zinc-700 hover:bg-zinc-700 sm:text-base"
       >
-        <MapPin className="w-4 h-4" />
-        <span className="font-medium">
+        <MapPin className="flex-shrink-0 w-4 h-4" />
+        <span className="font-medium truncate max-w-[120px] sm:max-w-none">
           {selectedFarm ? selectedFarm.farm_name : t('dashboard.selectFarm')}
         </span>
-        <ChevronDown className="w-4 h-4" />
+        <ChevronDown className="flex-shrink-0 w-4 h-4" />
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg z-50">
+        <div className="absolute right-0 z-50 w-64 mt-2 border rounded-lg shadow-lg sm:left-0 top-full bg-zinc-800 border-zinc-700">
           <div className="p-2">
             {farms.map((farm) => (
               <button
@@ -42,28 +42,26 @@ const FarmSelector: React.FC<FarmSelectorProps> = ({
                   onSelectFarm(farm);
                   setIsOpen(false);
                 }}
-                className="w-full flex items-center gap-3 p-3 text-left hover:bg-zinc-700 rounded-lg transition-colors"
+                className="flex items-center w-full gap-3 p-3 text-left transition-colors rounded-lg hover:bg-zinc-700"
               >
-                <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                <div className="flex items-center justify-center flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg">
                   <MapPin className="w-4 h-4 text-white" />
                 </div>
-                <div>
-                  <p className="text-white font-medium">{farm.farm_name}</p>
-                  <p className="text-zinc-400 text-sm">{farm.location}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-white truncate">{farm.farm_name}</p>
+                  <p className="text-sm truncate text-zinc-400">{farm.location}</p>
                 </div>
               </button>
             ))}
           </div>
-          <div className="border-t border-zinc-700 p-2">
+          <div className="p-2 border-t border-zinc-700">
             <button
-              onClick={() => {
-                onAddFarm();
-                setIsOpen(false);
-              }}
-              className="w-full flex items-center gap-3 p-3 text-left hover:bg-zinc-700 rounded-lg transition-colors text-green-500"
+              onClick={() => alert(t('Upcoming feature: Add Farm'))}
+              className="flex items-center w-full gap-3 p-3 text-left text-green-500 transition-colors rounded-lg hover:bg-zinc-700"
             >
-              <Plus className="w-4 h-4" />
-              <span className="font-medium">{t('dashboard.addFarm')}</span>
+              <div>
+                Feature coming soon!
+              </div>
             </button>
           </div>
         </div>

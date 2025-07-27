@@ -44,19 +44,19 @@ const Scheduler: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <div className="text-white">{t('common.loading')}</div>
+      <div className='flex items-center justify-center min-h-screen bg-black'>
+        <img src="https://www.sparkyai.in/lovable-uploads/5422e3a0-c113-4836-83dc-61eb88a401d4.png" alt="" className='h-24 animate-pulse' />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex">
+    <div className="flex min-h-screen bg-zinc-950">
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="flex flex-col flex-1">
         <Header />
         <main className="flex-1 p-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto space-y-6">
+          <div className="mx-auto space-y-6 max-w-7xl">
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold text-white">{t('title')}</h1>
               <FarmSelector
@@ -70,12 +70,12 @@ const Scheduler: React.FC = () => {
             {selectedFarm ? (
               <ActivityScheduler farmId={selectedFarm.id} />
             ) : (
-              <div className="text-center py-12">
-                <Calendar className="w-12 h-12 text-zinc-500 mx-auto mb-4" />
-                <p className="text-zinc-400 mb-2">{t('dashboard.noFarms')}</p>
+              <div className="py-12 text-center">
+                <Calendar className="w-12 h-12 mx-auto mb-4 text-zinc-500" />
+                <p className="mb-2 text-zinc-400">{t('dashboard.noFarms')}</p>
                 <button
                   onClick={handleAddFarm}
-                  className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                  className="px-6 py-3 font-medium text-white transition-colors bg-green-500 rounded-lg hover:bg-green-600"
                 >
                   {t('dashboard.createFarm')}
                 </button>
