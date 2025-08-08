@@ -19,7 +19,7 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
     const initializeMap = async () => {
       try {
         const loader = new Loader({
-          apiKey: 'AIzaSyCD6tdI0vtm-xxenzkTUy4buenZUFrRs5o',
+          apiKey: 'AIzaSyC_jqN--ipiwIjkaXWaMrnd5Yx2d4953ME',
           version: 'weekly',
           libraries: ['geometry']
         });
