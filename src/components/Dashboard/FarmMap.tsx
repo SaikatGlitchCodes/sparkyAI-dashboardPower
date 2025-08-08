@@ -19,7 +19,7 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
     const initializeMap = async () => {
       try {
         const loader = new Loader({
-          apiKey: 'AIzaSyAb37oGF7BebVQlkRe3q2Z0tCIW3QJl8j8',
+          apiKey: 'AIzaSyCD6tdI0vtm-xxenzkTUy4buenZUFrRs5o',
           version: 'weekly',
           libraries: ['geometry']
         });
@@ -111,10 +111,10 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
   if (error) {
     return (
       <div className={`bg-zinc-800 rounded-lg flex items-center justify-center border border-zinc-700 ${className}`}>
-        <div className="text-center p-6">
-          <MapPin className="w-12 h-12 text-red-500 mx-auto mb-2" />
-          <p className="text-red-400 mb-2">Map Error</p>
-          <p className="text-zinc-500 text-sm">{error}</p>
+        <div className="p-6 text-center">
+          <MapPin className="w-12 h-12 mx-auto mb-2 text-red-500" />
+          <p className="mb-2 text-red-400">Map Error</p>
+          <p className="text-sm text-zinc-500">{error}</p>
         </div>
       </div>
     );
@@ -125,7 +125,7 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
       <div className="p-4 border-b border-zinc-800">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-500/20 rounded-lg">
+            <div className="p-2 rounded-lg bg-green-500/20">
               <MapPin className="w-5 h-5 text-green-400" />
             </div>
             <div>
@@ -133,11 +133,11 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
                 {farm ? farm.farm_name : 'Farm Location'}
               </h3>
               {farm && (
-                <p className="text-zinc-400 text-sm">{farm.location}</p>
+                <p className="text-sm text-zinc-400">{farm.location}</p>
               )}
             </div>
           </div>
-          <button className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors">
+          <button className="p-2 transition-colors rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800">
             <Maximize2 className="w-4 h-4" />
           </button>
         </div>
@@ -150,18 +150,18 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
         />
         
         {isLoading && (
-          <div className="absolute inset-0 bg-zinc-800 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-800">
             <div className="text-center">
-              <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+              <div className="w-8 h-8 mx-auto mb-2 border-2 border-green-500 rounded-full border-t-transparent animate-spin"></div>
               <p className="text-zinc-400">Loading map...</p>
             </div>
           </div>
         )}
 
         {!farm && !isLoading && (
-          <div className="absolute inset-0 bg-zinc-800/90 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-800/90">
             <div className="text-center">
-              <MapPin className="w-12 h-12 text-zinc-500 mx-auto mb-2" />
+              <MapPin className="w-12 h-12 mx-auto mb-2 text-zinc-500" />
               <p className="text-zinc-400">Select a farm to view location</p>
             </div>
           </div>
@@ -169,15 +169,15 @@ const FarmMap: React.FC<FarmMapProps> = ({ farm, className = '' }) => {
       </div>
 
       {farm && (
-        <div className="p-4 bg-zinc-800 text-sm text-zinc-400">
+        <div className="p-4 text-sm bg-zinc-800 text-zinc-400">
           <div className="grid grid-cols-2 gap-4">
             <div>
               <span className="text-zinc-500">Crop:</span>
-              <span className="text-white ml-2">{farm.crop}</span>
+              <span className="ml-2 text-white">{farm.crop}</span>
             </div>
             <div>
               <span className="text-zinc-500">Field ID:</span>
-              <span className="text-white ml-2">{farm.field_id}</span>
+              <span className="ml-2 text-white">{farm.field_id}</span>
             </div>
           </div>
         </div>

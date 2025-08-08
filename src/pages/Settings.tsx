@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Settings as SettingsIcon, User, Globe, Bell, Shield, Info, Save, Phone, Mail } from 'lucide-react';
+import { Settings as SettingsIcon, User, Globe, Bell, Shield, Info, Save, Phone, Mail, BarChart3 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import Sidebar from '../components/Layout/Sidebar';
 import Header from '../components/Layout/Header';
+import { APIUsageDashboard } from '../components/Dashboard/APIUsageDashboard';
 
 const Settings: React.FC = () => {
   const { user, signOut } = useAuth();
   const { language, setLanguage, t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'profile' | 'language' | 'notifications' | 'privacy' | 'about'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'language' | 'notifications' | 'privacy' | 'api' | 'about'>('profile');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileData, setProfileData] = useState({
     name: '',
     email: '',
@@ -48,7 +50,7 @@ const Settings: React.FC = () => {
       
       setMessage({ type: 'success', text: 'Settings saved successfully!' });
       setTimeout(() => setMessage(null), 3000);
-    } catch (error) {
+    } catch (_error) {
       setMessage({ type: 'error', text: 'Failed to save settings. Please try again.' });
       setTimeout(() => setMessage(null), 3000);
     } finally {
@@ -272,6 +274,19 @@ const Settings: React.FC = () => {
           </div>
         );
 
+      case 'api':
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">AI API Usage</h3>
+              <p className="text-zinc-400 text-sm mb-6">
+                Monitor and manage your AI API usage to control costs and optimize performance.
+              </p>
+              <APIUsageDashboard />
+            </div>
+          </div>
+        );
+
       case 'about':
         return (
           <div className="space-y-6">
@@ -354,9 +369,9 @@ const Settings: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-zinc-950 flex">
-      <Sidebar />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header onMenuClick={() => setSidebarOpen(true)} />
         <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="flex items-center justify-between">
@@ -393,11 +408,12 @@ const Settings: React.FC = () => {
                       { key: 'language', label: t('language'), icon: Globe },
                       { key: 'notifications', label: t('notifications'), icon: Bell },
                       { key: 'privacy', label: t('privacy'), icon: Shield },
+                      { key: 'api', label: 'API Usage', icon: BarChart3 },
                       { key: 'about', label: t('about'), icon: Info },
                     ].map(({ key, label, icon: Icon }) => (
                       <button
                         key={key}
-                        onClick={() => setActiveTab(key as any)}
+                        onClick={() => setActiveTab(key as 'profile' | 'language' | 'notifications' | 'privacy' | 'api' | 'about')}
                         className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-left ${
                           activeTab === key
                             ? 'bg-blue-500 text-white'
