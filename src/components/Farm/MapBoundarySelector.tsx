@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import { MapPin, Trash2, Save } from 'lucide-react';
+import { MapPin, Trash2 } from 'lucide-react';
 
 interface MapBoundarySelectorProps {
   onBoundaryChange: (coordinates: number[][]) => void;
@@ -22,7 +22,7 @@ const MapBoundarySelector: React.FC<MapBoundarySelectorProps> = ({
     const initializeMap = async () => {
       try {
         const loader = new Loader({
-          apiKey: 'AIzaSyAb37oGF7BebVQlkRe3q2Z0tCIW3QJl8j8',
+          apiKey: 'AIzaSyC_jqN--ipiwIjkaXWaMrnd5Yx2d4953ME',
           version: 'weekly',
           libraries: ['drawing', 'geometry']
         });
@@ -203,11 +203,11 @@ const MapBoundarySelector: React.FC<MapBoundarySelectorProps> = ({
 
   if (error) {
     return (
-      <div className="aspect-video bg-zinc-800 rounded-lg flex items-center justify-center border border-zinc-700">
+      <div className="flex items-center justify-center border rounded-lg aspect-video bg-zinc-800 border-zinc-700">
         <div className="text-center">
-          <MapPin className="w-12 h-12 text-red-500 mx-auto mb-2" />
-          <p className="text-red-400 mb-2">Map Loading Error</p>
-          <p className="text-zinc-500 text-sm">{error}</p>
+          <MapPin className="w-12 h-12 mx-auto mb-2 text-red-500" />
+          <p className="mb-2 text-red-400">Map Loading Error</p>
+          <p className="text-sm text-zinc-500">{error}</p>
         </div>
       </div>
     );
@@ -216,12 +216,12 @@ const MapBoundarySelector: React.FC<MapBoundarySelectorProps> = ({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-white font-medium">Farm Boundary</h3>
+        <h3 className="font-medium text-white">Farm Boundary</h3>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={startDrawing}
-            className="flex items-center gap-2 px-3 py-2 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg transition-colors"
+            className="flex items-center gap-2 px-3 py-2 text-sm text-white transition-colors bg-green-500 rounded-lg hover:bg-green-600"
           >
             <MapPin className="w-4 h-4" />
             Draw Boundary
@@ -230,7 +230,7 @@ const MapBoundarySelector: React.FC<MapBoundarySelectorProps> = ({
             <button
               type="button"
               onClick={clearPolygon}
-              className="flex items-center gap-2 px-3 py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg transition-colors"
+              className="flex items-center gap-2 px-3 py-2 text-sm text-white transition-colors bg-red-500 rounded-lg hover:bg-red-600"
             >
               <Trash2 className="w-4 h-4" />
               Clear
@@ -242,21 +242,21 @@ const MapBoundarySelector: React.FC<MapBoundarySelectorProps> = ({
       <div className="relative">
         <div
           ref={mapRef}
-          className="aspect-video w-full rounded-lg border border-zinc-700"
+          className="w-full border rounded-lg aspect-video border-zinc-700"
           style={{ minHeight: '400px' }}
         />
         
         {isLoading && (
-          <div className="absolute inset-0 bg-zinc-800 rounded-lg flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-zinc-800">
             <div className="text-center">
-              <div className="w-8 h-8 border-2 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+              <div className="w-8 h-8 mx-auto mb-2 border-2 border-green-500 rounded-full border-t-transparent animate-spin"></div>
               <p className="text-zinc-400">Loading Google Maps...</p>
             </div>
           </div>
         )}
       </div>
 
-      <div className="text-sm text-zinc-400 space-y-1">
+      <div className="space-y-1 text-sm text-zinc-400">
         <p>• Click "Draw Boundary" to start drawing your farm boundary</p>
         <p>• Click on the map to add points, double-click to finish</p>
         <p>• Drag points to adjust the boundary after drawing</p>
